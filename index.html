@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>EmoCare Dashboard</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(135deg, #e0f7fa, #f1f8e9);
+      margin: 0;
+      color: #333;
+    }
+    header {
+      background: linear-gradient(90deg, #0077b6, #00b4d8);
+      color: white;
+      padding: 25px;
+      text-align: center;
+      font-size: 28px;
+      letter-spacing: 1px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    }
+    .container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      padding: 30px;
+    }
+    .card {
+      background: rgba(255, 255, 255, 0.8);
+      backdrop-filter: blur(10px);
+      border-radius: 15px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+      margin: 15px;
+      padding: 25px;
+      width: 400px;
+      transition: transform 0.3s ease;
+    }
+    .card:hover {
+      transform: translateY(-5px);
+    }
+    h2 {
+      color: #0077b6;
+      margin-bottom: 15px;
+    }
+    footer {
+      background: #caf0f8;
+      text-align: center;
+      padding: 15px;
+      font-size: 14px;
+      color: #023e8a;
+      font-weight: 500;
+    }
+  </style>
+</head>
+<body>
+  <header>💙 EmoCare Emotional AI Dashboard</header>
+
+  <div class="container">
+    <div class="card">
+      <h2>Emotion Distribution</h2>
+      <canvas id="emotionChart"></canvas>
+    </div>
+    <div class="card">
+      <h2>Daily Chat Trends</h2>
+      <canvas id="chatTrend"></canvas>
+    </div>
+    <div class="card">
+      <h2>Average Mood Score</h2>
+      <canvas id="moodChart"></canvas>
+    </div>
+  </div>
+
+  <footer>Prepared By Harshali Sawant | Emotional AI Capstone Project</footer>
+
+  <script>
+    const emotionCtx = document.getElementById('emotionChart');
+    new Chart(emotionCtx, {
+      type: 'doughnut',
+      data: {
+        labels: ['Joy', 'Sadness', 'Anger', 'Fear', 'Love', 'Surprise'],
+        datasets: [{
+          data: [25, 30, 15, 10, 12, 8],
+          backgroundColor: ['#00b4d8','#90e0ef','#0077b6','#caf0f8','#48cae4','#0096c7'],
+          borderWidth: 2
+        }]
+      },
+      options: { plugins: { legend: { position: 'bottom' } } }
+    });
+
+    const chatCtx = document.getElementById('chatTrend');
+    new Chart(chatCtx, {
+      type: 'line',
+      data: {
+        labels: ['Mon','Tue','Wed','Thu','Fri','Sat','Sun'],
+        datasets: [{
+          label: 'Chats per Day',
+          data: [50, 65, 70, 80, 90, 120, 100],
+          borderColor: '#0077b6',
+          backgroundColor: '#90e0ef',
+          fill: true,
+          tension: 0.4
+        }]
+      },
+      options: { plugins: { legend: { display: false } } }
+    });
+
+    const moodCtx = document.getElementById('moodChart');
+    new Chart(moodCtx, {
+      type: 'bar',
+      data: {
+        labels: ['Positive', 'Neutral', 'Negative'],
+        datasets: [{
+          label: 'Mood Score',
+          data: [4.2, 3.1, 2.5],
+          backgroundColor: ['#00b4d8','#90e0ef','#0077b6']
+        }]
+      },
+      options: { scales: { y: { beginAtZero: true, max: 5 } } }
+    });
+  </script>
+</body>
+</html>
